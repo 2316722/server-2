@@ -56,10 +56,10 @@
         <th>タイトル</th>
         <th>内容</th>
       </tr>
-      <tr>
-        <td>{{list[0].start_time}}</td>
-        <td>{{list[0].title}}</td>
-        <td>{{list[0].subtitle}}</td>
+      <tr v-for="item in list">
+        <td>{{item.start_time}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.subtitle}}</td>
       </tr>
     </table>
     <button @click="console.log(area, service, date)">確認</button>
