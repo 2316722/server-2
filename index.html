@@ -69,9 +69,18 @@
       return {
         // 変数（プロパティ）
         list: false,
-        apikey: '' // 自分で取得する
 
         // 関数（メソッド）
+        async getProgramList() {
+          const apikey = localStorage.getItem('API_KEY');
+          const query = new URLSearchParams({
+            key: apikey
+          });
+          const res = await fetch('https://api.nhk.or.jp/v2/pg/list/130/g1/2025-10-03.json?' + query);
+          const obj = await res.json();
+          this.data = obj;
+          console.log(JSON.stringify(obj, null, 5)); //数字はインデントの深さ
+        }
       };
     }
   </script>
