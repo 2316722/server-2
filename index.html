@@ -57,7 +57,7 @@
         <th>内容</th>
       </tr>
       <tr>
-        <td></td>
+        <td>{{}}</td>
         <td></td>
         <td></td>
       </tr>
@@ -84,8 +84,8 @@
             `https://api.nhk.or.jp/v2/pg/list/${this.area}/${this.service}/${this.date}.json?` + query
           );
           const obj = await res.json();
-          this.data = obj;
-          console.log(JSON.stringify(obj, null, 5)); //数字はインデントの深さ
+          this.list = obj.list[this.service]; //objの中のlistの中のg1（this.をつける必要があるのでブラケット記法）
+          console.log(JSON.stringify(this.list, null, 5)); //数字はインデントの深さ
         }
       };
     }
