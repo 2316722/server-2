@@ -57,7 +57,7 @@
         <th>内容</th>
       </tr>
       <tr v-for="item in list">
-        <td>{{item.start_time}}</td>
+        <td>{{formatTime(item)}}</td>
         <td>{{item.title}}</td>
         <td>{{item.subtitle}}</td>
       </tr>
@@ -86,6 +86,11 @@
           const obj = await res.json();
           this.list = obj.list[this.service]; //objの中のlistの中のg1（this.をつける必要があるのでブラケット記法）
           console.log(JSON.stringify(this.list, null, 5)); //数字はインデントの深さ
+        },
+        formatTime(i) {
+          const t = i.start_time.split('T'); //引数にforでまわしている各番組のオブジェクトが入る
+          const t2 = t[1].split(':');
+          return t2[0] + ':' + t2[1];
         }
       };
     }
