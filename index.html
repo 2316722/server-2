@@ -66,13 +66,20 @@
   </body>
 
   <script>
+    function getNowDate() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const date = today.getDate();
+      return `${year}-${month}-${date}`;
+    }
     function dataset() {
       return {
         // 変数（プロパティ）
         list: false,
         area: '130',
         service: 'g1',
-        date: '2025-10-03', // YYYYMMDD
+        date: getNowDate(),
 
         // 関数（メソッド）
         async getProgramList() {
