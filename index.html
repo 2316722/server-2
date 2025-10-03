@@ -35,7 +35,7 @@
     <!-- データが取得できたときにdl要素を表示する -->
     <label
       >地域：
-      <select>
+      <select v-model="area">
         <option value="130">東京</option>
         <option value="270">大阪</option>
       </select>
@@ -43,7 +43,7 @@
 
     <label
       >チャンネル：
-      <select>
+      <select v-model="service">
         <option value="g1">NHK 総合1</option>
         <option value="s1">NHK BS1</option>
         <option value="r3">NHK FM</option>
@@ -62,6 +62,7 @@
         <td></td>
       </tr>
     </table>
+    <button @click="console.log(area, service, date)">確認</button>
   </body>
 
   <script>
@@ -69,6 +70,9 @@
       return {
         // 変数（プロパティ）
         list: false,
+        area: '130',
+        service: 'g1',
+        date: '2025-10-03', // YYYYMMDD
 
         // 関数（メソッド）
         async getProgramList() {
@@ -76,7 +80,9 @@
           const query = new URLSearchParams({
             key: apikey
           });
-          const res = await fetch('https://api.nhk.or.jp/v2/pg/list/130/g1/2025-10-03.json?' + query);
+          const res = await fetch(
+            `https://api.nhk.or.jp/v2/pg/list/${this.area}/${this.service}/${this.date}.json?` + query
+          );
           const obj = await res.json();
           this.data = obj;
           console.log(JSON.stringify(obj, null, 5)); //数字はインデントの深さ
